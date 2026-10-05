@@ -18,7 +18,7 @@ def test_category_initialization():
 
     assert category.name == "Электроника"
     assert category.description == "Электронные устройства"
-    assert category.products == [product]
+    assert category.products == "iPhone, 100000 руб. Остаток: 5 шт.\n"
 
 
 def test_category_count():
@@ -44,3 +44,18 @@ def test_product_count():
     )
 
     assert Category.product_count == 2
+
+
+def test_add_product():
+    Category.category_count = 0
+    Category.product_count = 0
+
+    category = Category("Электроника", "Техника", [])
+
+    product = Product("iPhone", "Смартфон", 100000, 5)
+
+    result = category.add_product(product)
+
+    assert result is None
+    assert Category.product_count == 1
+    assert category.products == "iPhone, 100000 руб. Остаток: 5 шт.\n"
