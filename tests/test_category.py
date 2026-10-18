@@ -1,5 +1,6 @@
 from homework_17.category import Category
 from homework_17.product import Product
+from homework_17.smartphone import Smartphone
 
 
 def test_category_initialization():
@@ -59,3 +60,29 @@ def test_add_product():
     assert result is None
     assert Category.product_count == 1
     assert category.products == "iPhone, 100000 руб. Остаток: 5 шт.\n"
+
+
+def test_add_smartphone():
+    Category.product_count = 0
+
+    category = Category("Смартфоны", "Техника", [])
+    smartphone = Smartphone(
+        "Samsung", "Смартфон", 100000, 2,
+        95.5, "S23", 256, "Черный",
+    )
+
+    category.add_product(smartphone)
+
+    assert Category.product_count == 1
+    assert "Samsung" in category.products
+
+
+def test_add_invalid_product():
+    category = Category("Смартфоны", "Техника", [])
+
+    try:
+        category.add_product("Not a product")
+    except TypeError:
+        assert True
+    else:
+        assert False, "Ожидалась ошибка TypeError"
