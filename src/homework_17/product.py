@@ -1,9 +1,16 @@
-class Product:
-    def __init__(self, name, description, price, quantity):
-        self.name = name
-        self.description = description
-        self.__price = price
-        self.quantity = quantity
+from homework_17.base_product import BaseProduct
+from homework_17.print_mixin import PrintMixin
+
+
+class Product(PrintMixin, BaseProduct):
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: int | float,
+        quantity: int,
+    ) -> None:
+        super().__init__(name, description, price, quantity)
 
     @classmethod
     def new_product(cls, product_data: dict):
@@ -13,17 +20,6 @@ class Product:
             product_data["price"],
             product_data["quantity"],
         )
-
-    @property
-    def price(self):
-        return self.__price
-
-    @price.setter
-    def price(self, value):
-        if value > 0:
-            self.__price = value
-        else:
-            print("Цена не должна быть нулевая или отрицательная")
 
     def __str__(self) -> str:
         return (
@@ -35,6 +31,6 @@ class Product:
         if type(self) is not type(other):
             raise TypeError("Можно складывать только товары одного типа")
         return (
-                self.price * self.quantity
-                + other.price * other.quantity
+            self.price * self.quantity
+            + other.price * other.quantity
         )

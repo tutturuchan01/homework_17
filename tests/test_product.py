@@ -1,3 +1,7 @@
+
+import pytest
+
+from homework_17.base_product import BaseProduct
 from homework_17.lawn_grass import LawnGrass
 from homework_17.product import Product
 from homework_17.smartphone import Smartphone
@@ -54,6 +58,8 @@ def test_price_setter_invalid(capsys):
         100000,
         5,
     )
+
+    capsys.readouterr()
 
     product.price = -100
 
@@ -157,9 +163,58 @@ def test_addition_different_types():
         "Россия", "7 дней", "Зеленый",
     )
 
-    try:
+    with pytest.raises(TypeError):
         smartphone + grass
-    except TypeError:
-        assert True
-    else:
-        assert False, "Ожидалась ошибка TypeError"
+
+
+def test_base_product_is_abstract():
+    with pytest.raises(TypeError):
+        BaseProduct("Товар", "Описание", 1000, 5)
+
+
+def test_product_print_mixin(capsys):
+    Product(
+        "iPhone",
+        "Смартфон Apple",
+        100000,
+        5,
+    )
+
+    captured = capsys.readouterr()
+
+    assert "Создан объект класса Product" in captured.out
+    assert "iPhone" in captured.out
+    assert "100000" in captured.out
+
+
+def test_smartphone_print_mixin(capsys):
+    Smartphone(
+        "Samsung",
+        "Смартфон",
+        100000,
+        2,
+        95.5,
+        "S23",
+        256,
+        "Черный",
+    )
+
+    captured = capsys.readouterr()
+
+    assert "Создан объект класса Smartphone" in captured.out
+
+
+def test_lawn_grass_print_mixin(capsys):
+    LawnGrass(
+        "Газонная трава",
+        "Описание",
+        500,
+        20,
+        "Россия",
+        "7 дней",
+        "Зеленый",
+    )
+
+    captured = capsys.readouterr()
+
+    assert "Создан объект класса LawnGrass" in captured.out
