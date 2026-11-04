@@ -182,9 +182,9 @@ def test_product_print_mixin(capsys):
 
     captured = capsys.readouterr()
 
-    assert "Создан объект класса Product" in captured.out
-    assert "iPhone" in captured.out
-    assert "100000" in captured.out
+    assert captured.out == (
+        "Product('iPhone', 'Смартфон Apple', 100000, 5)\n"
+    )
 
 
 def test_smartphone_print_mixin(capsys):
@@ -201,7 +201,9 @@ def test_smartphone_print_mixin(capsys):
 
     captured = capsys.readouterr()
 
-    assert "Создан объект класса Smartphone" in captured.out
+    assert captured.out == (
+        "Smartphone('Samsung', 'Смартфон', 100000, 2)\n"
+    )
 
 
 def test_lawn_grass_print_mixin(capsys):
@@ -217,4 +219,6 @@ def test_lawn_grass_print_mixin(capsys):
 
     captured = capsys.readouterr()
 
-    assert "Создан объект класса LawnGrass" in captured.out
+    assert captured.out == (
+        "LawnGrass('Газонная трава', 'Описание', 500, 20)\n"
+    )

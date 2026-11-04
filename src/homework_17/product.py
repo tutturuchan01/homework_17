@@ -27,6 +27,13 @@ class Product(PrintMixin, BaseProduct):
             f"Остаток: {self.quantity} шт."
         )
 
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}("
+            f"{self.name!r}, {self.description!r}, "
+            f"{self.price!r}, {self.quantity!r})"
+        )
+
     def __add__(self, other) -> int | float:
         if type(self) is not type(other):
             raise TypeError("Можно складывать только товары одного типа")
