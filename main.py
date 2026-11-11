@@ -109,3 +109,37 @@ if __name__ == "__main__":
         category_smartphones.add_product("Not a product")
     except TypeError:
         print("Возникла ошибка TypeError при добавлении не продукта")
+
+    try:
+        product_invalid = Smartphone(
+            "Бракованный товар",
+            "Неверное количество",
+            1000.0,
+            0,
+            90.0,
+            "Invalid",
+            128,
+            "Black",
+        )
+    except ValueError:
+        print(
+            "Возникла ошибка ValueError при попытке "
+            "добавить продукт с нулевым количеством"
+        )
+    else:
+        print(
+            "Не возникла ошибка ValueError при попытке "
+            "добавить продукт с нулевым количеством"
+        )
+
+    print("Средняя цена смартфонов:")
+    print(category_smartphones.middle_price())
+
+    category_empty = Category(
+        "Пустая категория",
+        "Категория без продуктов",
+        [],
+    )
+
+    print("Средняя цена пустой категории:")
+    print(category_empty.middle_price())

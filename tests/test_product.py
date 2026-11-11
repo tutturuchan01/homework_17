@@ -21,6 +21,20 @@ def test_product_initialization():
     assert product.quantity == 5
 
 
+def test_product_zero_quantity():
+    with pytest.raises(ValueError) as exc_info:
+        Product(
+            "Бракованный товар",
+            "Неверное количество",
+            1000,
+            0,
+        )
+
+    assert str(exc_info.value) == (
+        "Товар с нулевым количеством не может быть добавлен"
+    )
+
+
 def test_new_product():
     product_data = {
         "name": "iPhone",

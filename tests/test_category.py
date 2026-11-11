@@ -86,3 +86,23 @@ def test_add_invalid_product():
         assert True
     else:
         assert False, "Ожидалась ошибка TypeError"
+
+
+def test_middle_price():
+    product_1 = Product("Phone 1", "Description", 100, 2)
+    product_2 = Product("Phone 2", "Description", 200, 3)
+    product_3 = Product("Phone 3", "Description", 300, 1)
+
+    category = Category(
+        "Phones",
+        "Phone category",
+        [product_1, product_2, product_3],
+    )
+
+    assert category.middle_price() == 200
+
+
+def test_middle_price_empty_category():
+    category = Category("Empty", "Empty category", [])
+
+    assert category.middle_price() == 0

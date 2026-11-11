@@ -10,6 +10,11 @@ class Product(PrintMixin, BaseProduct):
         price: int | float,
         quantity: int,
     ) -> None:
+        if quantity == 0:
+            raise ValueError(
+                "Товар с нулевым количеством не может быть добавлен"
+            )
+
         super().__init__(name, description, price, quantity)
 
     @classmethod
