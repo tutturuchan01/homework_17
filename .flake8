@@ -1,0 +1,2 @@
+[flake8]
+exclude = src/homework_17/14.2_main.py
